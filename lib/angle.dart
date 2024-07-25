@@ -29,19 +29,31 @@ class Angle implements Comparable<Angle> {
   }
 
   Angle operator +(Angle other) {
-    return Angle(other.radians + radians);
+    return Angle(radians + other.radians);
   }
 
   Angle operator -(Angle other) {
-    return Angle(other.radians - radians);
+    return Angle(radians - other.radians);
   }
 
-  Angle operator *(Angle other) {
-    return Angle(other.radians * radians);
+  Angle operator *(other) {
+    if (other is num) {
+      return Angle.radians(radians * other);
+    }
+    if (other is Angle) {
+      return Angle(radians * other.radians);
+    }
+    throw Exception("mismatching type");
   }
 
-  Angle operator /(Angle other) {
-    return Angle(other.radians / radians);
+  Angle operator /(other) {
+    if (other is num) {
+      return Angle.radians(radians / other);
+    }
+    if (other is Angle) {
+      return Angle(radians / other.radians);
+    }
+    throw Exception("mismatching type");
   }
 
   @override
